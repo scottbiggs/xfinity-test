@@ -1,0 +1,9 @@
+<!--
+    The Wire version of strings.  If there is a name collision,
+    the Wire build overrides the main version.
+-->
+<resources>
+
+    <string name="app_name">The Wire</string>
+
+</resources>
