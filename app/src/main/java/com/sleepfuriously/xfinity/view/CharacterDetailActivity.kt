@@ -54,7 +54,10 @@ class CharacterDetailActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem) =
+
         when (item.itemId) {
+
+            // This is actually the "back" button in the tooblar!
             android.R.id.home -> {
                 // This ID represents the Home or Up button. In the case of this
                 // activity, the Up button is shown. For
@@ -63,8 +66,11 @@ class CharacterDetailActivity : AppCompatActivity() {
                 // http://developer.android.com/design/patterns/navigation.html#up-vs-back
 
                 navigateUpTo(Intent(this, CharacterListActivity::class.java))
+                overridePendingTransition(android.R.anim.slide_in_left,
+                    android.R.anim.slide_out_right)
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+
 }
