@@ -18,14 +18,14 @@ class CharacterInfo {
         private val DTAG = CharacterInfo::class.java.simpleName
 
         /** Keys to get the class data from JSON objects  */
-        val TEXT_KEY = "Text"
-        val ICON_KEY = "Icon"
+        const val TEXT_KEY = "Text"
+        const val ICON_KEY = "Icon"
 
         /**
          * This sequence of characters define the difference between the name and
          * the description of a character in the JSON string returned by TEXT_KEY.
          */
-        private val NAME_DESC_DELIMITER = " - "
+        private const val NAME_DESC_DELIMITER = " - "
     }
 
 
@@ -44,9 +44,7 @@ class CharacterInfo {
     /**
      * Basic constructor
      */
-    constructor() {
-
-    }
+    constructor()
 
     /**
      * Constructor where the data is supplied
@@ -55,7 +53,7 @@ class CharacterInfo {
      * @param _desc     A description of the character
      * @param _iconUrl  URL where an image can be found
      */
-    constructor(_name: String, _desc: String, _iconUrl: String) {
+    constructor(_name: String?, _desc: String?, _iconUrl: String?) {
         name = _name
         desc = _desc
         iconUrl = _iconUrl
