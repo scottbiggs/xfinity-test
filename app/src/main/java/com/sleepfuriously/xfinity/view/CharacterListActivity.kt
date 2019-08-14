@@ -12,19 +12,24 @@ import android.widget.TextView
 import com.sleepfuriously.xfinity.R
 
 import com.sleepfuriously.xfinity.dummy.DummyContent
-import kotlinx.android.synthetic.main.activity_item_list.*
-import kotlinx.android.synthetic.main.item_list_content.view.*
-import kotlinx.android.synthetic.main.item_list.*
+import kotlinx.android.synthetic.main.character_list_activity.*
+import kotlinx.android.synthetic.main.character_content.view.*
+import kotlinx.android.synthetic.main.char_list.*
 
 /**
- * An activity representing a list of Pings. This activity
- * has different presentations for handset and tablet-size devices. On
- * handsets, the activity presents a list of items, which when touched,
- * lead to a [ItemDetailActivity] representing
- * item details. On tablets, the activity presents the list of items and
- * item details side-by-side using two vertical panes.
+ * The main Activity for this app (it all starts here).
+ *
+ * This activity has different presentations for handset and tablet-size devices.
+ * On handsets, the activity presents a list of character names, which when touched,
+ * lead to a [CharacterDetailActivity] representing character details.
+ * On tablets, the activity presents the list of character names and
+ * their details side-by-side using two vertical panes.
  */
-class ItemListActivity : AppCompatActivity() {
+class CharacterListActivity : AppCompatActivity() {
+
+    //----------------------------
+    //  data
+    //----------------------------
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -32,9 +37,14 @@ class ItemListActivity : AppCompatActivity() {
      */
     private var twoPane: Boolean = false
 
+
+    //----------------------------
+    //  functions
+    //----------------------------
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_item_list)
+        setContentView(R.layout.character_list_activity)
 
         setSupportActionBar(toolbar)
         toolbar.title = title
@@ -44,7 +54,7 @@ class ItemListActivity : AppCompatActivity() {
                 .setAction("Action", null).show()
         }
 
-        if (item_detail_container != null) {
+        if (char_detail_container != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
@@ -52,7 +62,7 @@ class ItemListActivity : AppCompatActivity() {
             twoPane = true
         }
 
-        setupRecyclerView(item_list)
+        setupRecyclerView(character_list_rv)
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
@@ -63,8 +73,12 @@ class ItemListActivity : AppCompatActivity() {
         )
     }
 
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    //  inner classes
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     class SimpleItemRecyclerViewAdapter(
-        private val parentActivity: ItemListActivity,
+        private val parentActivity: CharacterListActivity,
         private val values: List<DummyContent.DummyItem>,
         private val twoPane: Boolean
     ) :
@@ -76,18 +90,19 @@ class ItemListActivity : AppCompatActivity() {
             onClickListener = View.OnClickListener { v ->
                 val item = v.tag as DummyContent.DummyItem
                 if (twoPane) {
-                    val fragment = ItemDetailFragment().apply {
+                    val fragment = CharacterDetailFragment().apply {
                         arguments = Bundle().apply {
-                            putString(ItemDetailFragment.ARG_ITEM_ID, item.id)
+                            putString(CharacterDetailFragment.ARG_ITEM_ID, item.id)
                         }
                     }
                     parentActivity.supportFragmentManager
                         .beginTransaction()
-                        .replace(R.id.item_detail_container, fragment)
+                        .replace(R.id.char_detail_container, fragment)
                         .commit()
                 } else {
-                    val intent = Intent(v.context, ItemDetailActivity::class.java).apply {
-                        putExtra(ItemDetailFragment.ARG_ITEM_ID, item.id)
+                    val intent = Intent(v.context, CharacterDetailActivity::class.java).apply {
+//                        addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                        putExtra(CharacterDetailFragment.ARG_ITEM_ID, item.id)
                     }
                     v.context.startActivity(intent)
                 }
@@ -96,14 +111,13 @@ class ItemListActivity : AppCompatActivity() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_list_content, parent, false)
+                .inflate(R.layout.character_content, parent, false)
             return ViewHolder(view)
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val item = values[position]
-            holder.idView.text = item.id
-            holder.contentView.text = item.content
+            holder.charName.text = item.id
 
             with(holder.itemView) {
                 tag = item
@@ -114,8 +128,7 @@ class ItemListActivity : AppCompatActivity() {
         override fun getItemCount() = values.size
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val idView: TextView = view.id_text
-            val contentView: TextView = view.content
+            val charName: TextView = view.char_name_tv
         }
     }
-}
+} // class CharacterListActivity

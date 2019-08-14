@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.sleepfuriously.xfinity">
+          xmlns:tools="http://schemas.android.com/tools" package="com.sleepfuriously.xfinity">
 
     <application
             android:allowBackup="true"
@@ -8,9 +8,10 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            tools:ignore="GoogleAppIndexingWarning">
         <activity
-                android:name=".view.ItemListActivity"
+                android:name=".view.CharacterListActivity"
                 android:label="@string/app_name"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -20,13 +21,13 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".view.ItemDetailActivity"
+                android:name=".view.CharacterDetailActivity"
                 android:label="@string/title_item_detail"
-                android:parentActivityName=".view.ItemListActivity"
+                android:parentActivityName=".view.CharacterListActivity"
                 android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.sleepfuriously.xfinity.view.ItemListActivity"/>
+                    android:value="com.sleepfuriously.xfinity.view.CharacterListActivity"/>
         </activity>
     </application>
 
