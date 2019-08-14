@@ -56,8 +56,12 @@ class CharacterDetailActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem) =
 
         when (item.itemId) {
+<<<<<<< HEAD
 
             // This is actually the "back" button in the tooblar!
+=======
+            // This is the "back" button in the tooblar!
+>>>>>>> dfd1e2b291473bfc83f66dff4b39580cb60affba
             android.R.id.home -> {
                 // This ID represents the Home or Up button. In the case of this
                 // activity, the Up button is shown. For
