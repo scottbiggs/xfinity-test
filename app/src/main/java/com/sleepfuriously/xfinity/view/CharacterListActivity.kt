@@ -101,7 +101,6 @@ class CharacterListActivity : AppCompatActivity() {
                         .commit()
                 } else {
                     val intent = Intent(v.context, CharacterDetailActivity::class.java).apply {
-//                        addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                         putExtra(CharacterDetailFragment.ARG_ITEM_ID, item.id)
                     }
                     v.context.startActivity(intent)
