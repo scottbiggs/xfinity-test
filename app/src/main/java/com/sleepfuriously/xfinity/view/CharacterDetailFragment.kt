@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.character_detail.view.*
 
 /**
  * A fragment that displays a single Character's detail.
- * This fragment is either contained in a [CharacterListActivity]
+ * This fragment is either contained in a [MainActivity]
  * in two-pane mode (on tablets) or a [CharacterDetailActivity]
  * on handsets.
  */

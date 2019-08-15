@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,10 +21,10 @@ import kotlinx.android.synthetic.main.char_list.*
  * This activity has different presentations for handset and tablet-size devices.
  * On handsets, the activity presents a list of character names, which when touched,
  * lead to a [CharacterDetailActivity] representing character details.
- * On tablets, the activity presents the list of character names and
+ * On tablets, this activity presents the list of character names and
  * their details side-by-side using two vertical panes.
  */
-class CharacterListActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     //----------------------------
     //  data
@@ -78,7 +77,7 @@ class CharacterListActivity : AppCompatActivity() {
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     class SimpleItemRecyclerViewAdapter(
-        private val parentActivity: CharacterListActivity,
+        private val parentActivity: MainActivity,
         private val values: List<DummyContent.DummyItem>,
         private val twoPane: Boolean
     ) :

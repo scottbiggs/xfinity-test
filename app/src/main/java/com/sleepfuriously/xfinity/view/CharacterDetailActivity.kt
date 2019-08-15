@@ -64,7 +64,7 @@ class CharacterDetailActivity : AppCompatActivity() {
                 //
                 // http://developer.android.com/design/patterns/navigation.html#up-vs-back
 
-                navigateUpTo(Intent(this, CharacterListActivity::class.java))
+                navigateUpTo(Intent(this, MainActivity::class.java))
                 overridePendingTransition(android.R.anim.slide_in_left,
                     android.R.anim.slide_out_right)
                 true

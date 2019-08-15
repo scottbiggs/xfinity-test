@@ -15,7 +15,7 @@ master/detail flow.
         android:divider="?android:attr/dividerHorizontal"
         android:orientation="horizontal"
         android:showDividers="middle"
-        tools:context=".view.CharacterListActivity">
+        tools:context=".view.MainActivity">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -26,7 +26,7 @@ master/detail flow.
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             app:layoutManager="LinearLayoutManager"
-            tools:context="com.sleepfuriously.xfinity.view.CharacterListActivity"
+            tools:context="com.sleepfuriously.xfinity.view.MainActivity"
             tools:listitem="@layout/character_content"/>
 
     <FrameLayout
