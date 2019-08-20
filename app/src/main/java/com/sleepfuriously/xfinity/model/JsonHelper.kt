@@ -50,7 +50,7 @@ fun getCharacterList(jobject: JSONObject): List<CharacterInfo>? {
             list.add(character)
         }
     } catch (e: JSONException) {
-        Log.e(DTAG, "Unable to parse JSON data in getCharacterList()!")
+        Log.e(DTAG, "Unable to parse JSON data in getCharacterInfoList()!")
         e.printStackTrace()
         list = null
     }

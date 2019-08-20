@@ -1,6 +1,9 @@
 package com.sleepfuriously.xfinity.view
 
+import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -8,6 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import com.google.android.material.snackbar.Snackbar
 import com.sleepfuriously.xfinity.R
 
 import com.sleepfuriously.xfinity.dummy.DummyContent
@@ -36,6 +41,9 @@ class MainActivity : AppCompatActivity() {
      */
     private var twoPane: Boolean = false
 
+    /** Gives user something to look at while waiting for data access  */
+    internal lateinit var mProgressDialog: ProgressDialog;
+
 
     //----------------------------
     //  functions
@@ -61,7 +69,22 @@ class MainActivity : AppCompatActivity() {
             twoPane = true
         }
 
+        // gotta be on the  internet!
+        if (!isInternetAvailable()) {
+            Toast.makeText(this, R.string.no_internet_warning, Snackbar.LENGTH_LONG).show()
+            finish()
+        }
+
         setupRecyclerView(character_list_rv)
+
+        // before loading up the recyclerview, start the wait dialog
+        mProgressDialog = ProgressDialog(this)
+        mProgressDialog.setCancelable(false)
+        mProgressDialog.isIndeterminate = true
+        mProgressDialog.setTitle(R.string.loading)
+        mProgressDialog.show()
+
+
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
@@ -71,6 +94,19 @@ class MainActivity : AppCompatActivity() {
             twoPane
         )
     }
+
+    /**
+     * Goes through the ConnectivityManager to determine if this
+     * app has access to the internet currently.
+     */
+    private fun isInternetAvailable(): Boolean {
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetworkInfo = connectivityManager.activeNetworkInfo
+        return (activeNetworkInfo != null
+                && activeNetworkInfo.isAvailable
+                && activeNetworkInfo.isConnected)
+    }
+
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //  inner classes
